@@ -10,7 +10,7 @@ import {
   splitProps,
   Switch,
 } from "solid-js";
-import screenImage from "../assets/images/screen.svg";
+import bannerBackgroundImage from "../assets/images/banner-background.svg";
 import bannerTopImage from "../assets/images/banner-top.svg";
 import bannerCenterImage from "../assets/images/banner-center.svg";
 import bannerLeftImage from "../assets/images/banner-left.svg";
@@ -46,7 +46,7 @@ const StyleOption: ParentComponent<
           local.active ? "outline saturate-100" : "saturate-0"
         )}
       >
-        <img src={screenImage} />
+        <img src={bannerBackgroundImage} />
         {local.children}
       </div>
       <small class="text-sm text-gray-200">{local.description}</small>
@@ -138,7 +138,7 @@ export const Generator = () => {
           <Row step={2} label="Choose your style" description="Pick the theme and alignment for your overlay">
             <StyleOption
               label="Top"
-              description="Split view on left and right of the Top Bar"
+              description="On left and right of the Top Bar"
               active={params().theme === "top"}
               onClick={() => setParams((x) => ({ ...x, theme: "top" }))}
             >
@@ -150,7 +150,7 @@ export const Generator = () => {
               active={params().theme === "center"}
               onClick={() => setParams((x) => ({ ...x, theme: "center" }))}
             >
-              <img src={bannerCenterImage} class="absolute top-0" />
+              <img src={bannerCenterImage} class="absolute top-3" />
             </StyleOption>
             <StyleOption
               label="Left"
@@ -158,7 +158,7 @@ export const Generator = () => {
               active={params().theme === "left"}
               onClick={() => setParams((x) => ({ ...x, theme: "left" }))}
             >
-              <img src={bannerLeftImage} class="absolute top-0" />
+              <img src={bannerLeftImage} class="absolute left-0 top-5" />
             </StyleOption>
             <StyleOption
               label="Right"
@@ -166,7 +166,7 @@ export const Generator = () => {
               active={params().theme === "right"}
               onClick={() => setParams((x) => ({ ...x, theme: "right" }))}
             >
-              <img src={bannerRightImage} class="absolute top-0" />
+              <img src={bannerRightImage} class="absolute right-0 top-5" />
             </StyleOption>
             <StyleOption
               label="Floating"
@@ -174,13 +174,13 @@ export const Generator = () => {
               active={params().theme === "floating"}
               onClick={() => setParams((x) => ({ ...x, theme: "floating" }))}
             >
-              <img src={bannerFloatingImage} class="absolute top-1.5 right-1.5" />
+              <img src={bannerFloatingImage} class="absolute top-5 right-1.5" />
             </StyleOption>
           </Row>
           <Row
             step={3}
-            label="Adjust view details"
-            description="Optionally adjust additional graphics options"
+            label="Match scaling to ingame settings"
+            description="Set to your Settings->Gameplay->Console Scale ingame setting (70-120%)."
           >
             <label class="block py-2">
               <input
@@ -188,10 +188,10 @@ export const Generator = () => {
                 min="70"
                 max="120"
                 value={params()?.scale}
-                onChange={(e) => setParams((x) => ({ ...x, scale: e.currentTarget.value }))}
-                class="bg-black"
+                onChange={(e) => setParams((x) => ({ ...x, scale: parseInt(e.currentTarget.value) }))}
+                class="bg-black p-1 border border-gray-400/80 rounded-sm"
               />
-              <span class="ml-2 text-gray-100">Set to your Settings-&gt;Gameplay-&gt;Console Scale ingame setting (70-120).</span>
+              <span class="ml-2 text-gray-100">Ingame Console Scale setting (defaults to 100%)</span>
             </label>
           </Row>
           <Row
@@ -248,7 +248,9 @@ export const Generator = () => {
             </div>
             <div class="text-gray-300 mt-4">
               {" "}
-              In both instances, you should set it to 1920px / 1080px resolution. This should allow it to line up properly with the Top Bar in the Default and Center themes. Otherwise use a width of at least 800px and a height of 400px.
+              For Top/Center theme, you should set it to 1920px / 1080px resolution. This should allow it to line up properly with the Top Bar. (don't forget to set<br/>
+              Otherwise use a width of at least 800px and a height of 400px.<br/>
+              For Left/Right theme, adjust the vertical position to your liking.
             </div>
           </Row>
         </div>

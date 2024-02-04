@@ -9,7 +9,7 @@
 
 Get yours at [overlay.stormgateworld.com](https://overlay.stormgateworld.com/)
 
-<img width="1005" alt="CleanShot 2022-11-13 at 02 08 30@2x" src="https://user-images.githubusercontent.com/6642554/201501074-ea967231-59cb-44b4-b339-437bf741255c.png">
+<img src="./Preview.png">
 
 
 > **Note** 

@@ -65,7 +65,7 @@ export const Search: Component<{
       <Icons.Search class="absolute left-3 top-3 h-6 text-black pointer-events-none" />
       <input
         type="text"
-        onBlur={() => setTimeout(close, 100)}
+        onBlur={() => setTimeout(close, 400)}
         onInput={(e) => setQuery(e.currentTarget.value)}
         value={query()}
         onKeyDown={handleKeydown}
