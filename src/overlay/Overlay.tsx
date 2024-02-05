@@ -74,7 +74,7 @@ const Player: Component<{
         <Show when={!top()}>
           <h1
             class={classes(
-              "font-bold text-xl truncate",
+              "font-bold text-xl truncate max-w-[350px]",
               props.player.result == "loss" && "text-red-500",
               props.player.result == "win" && "text-green-500"
             )}
@@ -114,7 +114,7 @@ const Player: Component<{
         <Show when={top()}>
           <h1
             class={classes(
-              "font-bold text-xl truncate",
+              "font-bold text-xl truncate max-w-[350px]",
               props.player.result == "loss" && "text-red-500",
               props.player.result == "win" && "text-green-500"
             )}
@@ -188,10 +188,7 @@ const Overlay: Component = () => {
           <div class="bg-red-900 p-6 text-sm m-4 rounded-md max-w-[800px]">
             <div class="font-bold text-white text-md mb-4">No profile selected</div>
             <span class="text-white">
-              Make sure the url ends with{" "}
-              <code class="text-gray-100">
-                ?profileId=<span class="text-blue-300">your profile id</span>
-              </code>
+              Generate a proper url via {window.location.protocol}//{window.location.host}.
             </span>
           </div>
         </Match>
@@ -204,7 +201,8 @@ const Overlay: Component = () => {
         <Match when={theme === 'center'}>
           <div
             class={classes(
-              "bg-gradient-to-r rounded-md mt-0 w-[800px] text-white inline-flex items-center relative p-1.5",
+              "component-bar",
+              "bg-gradient-to-r rounded-md mt-0 w-[800px] text-white inline-flex items-center relative p-1.5 px-2.5",
               "duration-700 fade-in fade-out",
               visible() ? "animate-in" : "animate-out"
             )}
@@ -256,13 +254,18 @@ const Overlay: Component = () => {
           >
             <div
               class={classes(
-                "flex flex-col gap-2",
-                "pl-5 items-right",
-                "from-black/90 via-black/70 to-black/90 bg-gradient-to-r rounded-md mt-0 text-white inline-flex relative p-1.5"
+                "basis-1/2 w-[450px] mr-[390px] overflow-hidden",
+                "flex flex-col gap-2 items-end",
               )}
-              style={themes[theme+'-left']}
             >
-              <div class="min-w-0">
+              <div
+                class={classes(
+                  "component-bar",
+                  "min-w-0",
+                  "from-black/90 via-black/70 to-black/90 bg-gradient-to-r rounded-md mt-0 text-white inline-flex relative p-2.5 px-3.5"
+                )}
+                style={themes[theme+'-left']}
+              >
                 <For each={game()?.team}>
                   {(player) => (
                     <Player
@@ -275,17 +278,20 @@ const Overlay: Component = () => {
                 </For>
               </div>
             </div>
-            <div style={{"min-width": "780px"}}>
-            </div>
             <div
               class={classes(
-                "flex flex-col gap-2",
-                "pr-5 items-left",
-                "from-black/90 via-black/70 to-black/90 bg-gradient-to-r rounded-md mt-0 text-white inline-flex relative p-1.5"
+                "basis-1/2 w-[450px] ml-[390px] overflow-hidden",
+                "flex flex-col gap-2 items-start",
               )}
-              style={themes[theme+'-right']}
             >
-              <div class="min-w-0">
+              <div
+                class={classes(
+                  "component-bar",
+                  "min-w-0",
+                  "from-black/90 via-black/70 to-black/90 bg-gradient-to-r rounded-md mt-0 text-white inline-flex relative p-2.5 px-3.5"
+                )}
+                style={themes[theme+'-right']}
+              >
                 <For each={game()?.opponents}>
                   {(player) => (
                     <Player
@@ -313,8 +319,9 @@ const Overlay: Component = () => {
           >
             <div
               class={classes(
+                "component-bar",
                 "flex flex-col gap-2",
-                "px-3",
+                "px-3 max-w-[450px]",
                 theme === 'left' ? "from-black/80 via-black/80 to-black/60 rounded-r-md" : "from-black/60 via-black/80 to-black/80 rounded-l-md",
                 "bg-gradient-to-r mt-0 text-white inline-flex relative p-1.5"
               )}
@@ -345,6 +352,7 @@ const Overlay: Component = () => {
         <Match when={currentGame()}>
           <div
             class={classes(
+              "component-bar",
               "from-black/90 via-black/70 to-black/90 bg-gradient-to-r rounded-md mt-0 min-w-[800px] text-white inline-flex items-center relative p-1.5",
               "duration-700 fade-in fade-out",
               visible() ? "animate-in" : "animate-out"
@@ -399,14 +407,14 @@ const themes = {
     border-bottom-right-radius: 20px 60px;
   `,
   'top-left': `
-    background-image: radial-gradient(circle at 100% -70%, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0.7) 90%);
+    background-image: radial-gradient(circle at 100% -70%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 20%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0.7) 90%);
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-left-radius: 20px 60px;
     border-bottom-right-radius: 20px 35px;
   `,
   'top-right': `
-    background-image: radial-gradient(circle at 0% -70%, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0.7) 90%);
+    background-image: radial-gradient(circle at 0% -70%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 20%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0.7) 90%);
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-left-radius: 20px 35px;
