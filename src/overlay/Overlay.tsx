@@ -147,7 +147,7 @@ const Overlay: Component = () => {
       )
   );
   const [visible, setVisible] = createSignal(!!profileId);
-  const game = () => (currentGame.loading ? currentGame.latest : currentGame());
+  const game = () => (currentGame.loading ? currentGame.latest : currentGame.error ? null : currentGame());
   const teamGame = () => game()?.team.length > 1 || game()?.opponents.length > 1;
 
   const toggle = (show: boolean) => {
@@ -198,7 +198,7 @@ const Overlay: Component = () => {
             <span class="text-white">{currentGame.error?.message}</span>
           </div>
         </Match>
-        <Match when={theme === 'center'}>
+        <Match when={game() && theme === 'center'}>
           <div
             class={classes(
               "component-bar",
@@ -240,7 +240,7 @@ const Overlay: Component = () => {
             </div>
           </div>
         </Match>
-        <Match when={theme === 'top'}>
+        <Match when={game() && theme === 'top'}>
           <div 
             class={classes(
               "flex",
@@ -306,7 +306,7 @@ const Overlay: Component = () => {
             </div>
           </div>
         </Match>
-        <Match when={theme === 'left' || theme === 'right'}>
+        <Match when={game() && (theme === 'left' || theme === 'right')}>
           <div 
             class={classes(
               "duration-700 fade-in fade-out",
@@ -349,7 +349,7 @@ const Overlay: Component = () => {
             </div>
           </div>
         </Match>
-        <Match when={currentGame()}>
+        <Match when={game()}>
           <div
             class={classes(
               "component-bar",
@@ -369,9 +369,9 @@ const Overlay: Component = () => {
                 )}
               </For>
             </div>
-            <Show when={currentGame()?.kind !== 'ranked 1v1'}>
+            <Show when={game()?.kind !== 'ranked 1v1'}>
               <div class="text-center flex flex-grow flex-col self-start	gap-1 px-4 whitespace-nowrap">
-                <p class="text-sm uppercase text-white/80">{currentGame()?.kind}</p>
+                <p class="text-sm uppercase text-white/80">{game()?.kind}</p>
               </div>
             </Show>
             <div class="basis-1/2 flex flex-col gap-2 min-w-0">

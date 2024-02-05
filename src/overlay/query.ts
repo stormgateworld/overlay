@@ -70,7 +70,7 @@ export async function getLastGame(
 
     if ((response as any).error) throw new Error((response as any).error);
 
-    if (refetching && value.id == response.match_id && value.duration == response.duration) return value;
+    if (refetching && value && value.id == response.match_id && value.duration == response.duration) return value;
 
     const { players, duration, leaderboard } = response;
 
@@ -95,7 +95,7 @@ export async function getLastGame(
       result: player?.result,
     };
   } catch (e) {
-    if (refetching) return value;
+    if (refetching && value) return value;
     else throw e;
   }
 }
