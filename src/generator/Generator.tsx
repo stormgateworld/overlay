@@ -107,9 +107,12 @@ export const Generator = () => {
             A tool for streamers to display information about ongoing games in their broadcasts.
           </h2>
           <p class="text-lg text-gray-50 leading-snug max-w-xl">
-            Show your rank, rating and that of your opponent to your viewers using the tool build specifically for
+            Show your rank, mmr (not ranked points), wins, loses and win rate and that of your opponent to your viewers using the tool build specifically for
             streamers. Use the below generator to create a url that you can add as a browser source in your streaming
             software.
+          </p>
+          <p class="text-lg text-gray-50 leading-snug max-w-xl">
+            Note that the api used currently has a refresh interval of 60 seconds, thus it can take between 0 and 75 seconds for changes to be reflected in the overlay.
           </p>
           <a
             href="https://github.com/stormgateworld/overlay"
